@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="patients.php" method="POST">
+  <fieldset>
+    <legend>REGISTRATION OF NEW USERS DETAILS:</legend>
+
+    <label for="user"> Choose a user:</label><br>
+    <select id="user" name="user">
+        <option value ="Doctor ">Doctor </option>
+        <option value ="Pharmacist ">Pharmacist</option>
+
+    </select><br><br>
+
+
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" ><br>
+
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+
+    <label for="address">Users Address:</label><br>
+    <input type="text" id="address" name="address"><br>
+    
+    <label for="age"> Users Age:</label><br>
+    <input type="number" id="age" name="age"><br>
+    
+    <label for="email"> Users Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+
+    <label for="date"> Date of registration:</label><br>
+    <input type="datetime-local" id="date" name="date"><br>
+
+    <label for="Gender">Select a gender</label><br>
+    <input list ="Gender">
+    <datalist id ="Gender">
+        <option value="Female"></option>
+        <option value="Male"></option>
+    </datalist> <br><br><br>
+
+
+
+    <input type="submit" value="Sign up">
+    
+    
+  </fieldset>
+</form>
+
+</body>
+</html>
+
