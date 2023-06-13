@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="patients.php" method="POST">
+  <fieldset>
+    <legend>DOCTORS SUMMARY :</legend>
+
+    <label for="ssn">Patient SSN:</label><br>
+    <input type="text" id="ssn" name="ssn" required autofocus autocomplete="off"><br>
+
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" required autofocus autocomplete="off" ><br>
+
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" required autofocus autocomplete="off"><br>
+
+    <label for="Illness">Patient Illness(s):</label><br>
+    <textarea name="message" rows="5" cols="30"  required ></textarea><br>
+    
+
+    <label for="Prescription">Patient Prescription:</label><br>
+    <textarea name="message" rows="10" cols="30" required ></textarea><br>
+
+
+    <label for="drug">Drug(s) prescribed and their dosages:</label><br>
+    <textarea name="message" rows="10" cols="30" required ></textarea><br><br>
+
+
+    <input type="submit" value="Save in system">
+  </fieldset>
+</form>
+
+</body>
+</html>
