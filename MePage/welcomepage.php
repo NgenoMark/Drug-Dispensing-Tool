@@ -81,8 +81,8 @@ footer {
     <ul>
       <li><a href="Doctor.php">Login a doctor </a></li><br>
       <li><a href="Patient.php">Login as pharmacist</a></li><br>
-      <li><a href="signin.html">Sign up if you are a new user  </a></li><br>
-      <li><a href="signin.html">Pharmacy Details </a></li>
+      <li><a href="Signin.php">Sign up if you are a new user  </a></li><br>
+      <li><a href="Signin.php">Pharmacy Details </a></li>
     </ul>
   </nav>
   
