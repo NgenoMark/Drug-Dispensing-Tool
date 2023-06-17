@@ -13,7 +13,7 @@
   </style>
     </head>
 
-<form action="patients.php" method="POST">
+<form action="doctorsummary.php" method="POST">
   <fieldset>
 
     <?php
@@ -43,7 +43,7 @@
     <textarea name="message" rows="10" cols="30" required ></textarea><br>
 
 
-    <label for="drug">Drug(s) prescribed and their dosages:</label><br>
+    <label for="drugp">Drug(s) prescribed and their dosages:</label><br>
     <textarea name="message" rows="10" cols="30" required ></textarea><br><br>
 
 
