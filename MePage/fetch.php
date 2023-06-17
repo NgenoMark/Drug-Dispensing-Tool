@@ -15,7 +15,7 @@
 <h2>DISPLAY OF ALL PATIENTS DETAILS IN THE DATABASE</h2>
 
 <?php
-require_once('connect.php');
+require_once('dbconnection.php');
 
 $sql = "SELECT * FROM patients";
 $results = $conn->query($sql);
