@@ -10,6 +10,27 @@
             background-color: #96D4D6;
             border-style: solid;
         }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
     </style>
 </head>
 <body>
@@ -37,7 +58,20 @@
         $deleteStmt->close();
     }
 
-    $sql = "SELECT * FROM patients";
+    $results_per_page = 15; // Number of results per page
+    $sql = "SELECT COUNT(*) AS total FROM patients";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $total_pages = ceil($row['total'] / $results_per_page);
+
+    // Check if the current page is set, otherwise set it to 1
+    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+    // Calculate the starting and ending record indices for the current page
+    $start_index = ($current_page - 1) * $results_per_page;
+    $end_index = $start_index + $results_per_page - 1;
+
+    $sql = "SELECT * FROM patients LIMIT $start_index, $results_per_page";
     $results = $conn->query($sql);
 
     if ($results->num_rows > 0) {
@@ -69,6 +103,17 @@
         }
 
         echo '</table>';
+
+        // Display pagination links
+        echo '<div class="pagination">';
+        for ($page = 1; $page <= $total_pages; $page++) {
+            echo '<a href="?page='.$page.'"';
+            if ($page == $current_page) {
+                echo ' class="active"';
+            }
+            echo '>'.$page.'</a>';
+        }
+        echo '</div>';
     } else {
         echo "No records found.";
     }
