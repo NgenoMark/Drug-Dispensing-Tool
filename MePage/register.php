@@ -5,20 +5,49 @@ include("dbconnection.php");
 
 // Retrieve the form data
 $userType = $_POST["user"];
+$email = $_POST["email"];
 $username = $_POST["username"];
 $password = $_POST["password"];
 
 // Perform any necessary validation on the form data
 
+// Validate email format
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Invalid email format!</p>';
+    exit();
+}
+
 // Determine the table based on the user type
-$tableName = ($userType === "Doctor") ? "doctorlogin" : "pharmacistlogin";
+if ($userType === "Doctor") {
+    $tableName = "doctorslogin";
+} elseif ($userType === "Pharmacist") {
+    $tableName = "pharmacistslogin";
+} elseif ($userType === "Patient") {
+    $tableName = "patientslogin";
+} else {
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Invalid user type!</p>';
+    exit();
+}
+
+// Check if email already exists in the database
+$emailCheckQuery = "SELECT * FROM $tableName WHERE Email = '$email'";
+$emailCheckResult = mysqli_query($conn, $emailCheckQuery);
+if (mysqli_num_rows($emailCheckResult) > 0) {
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Email already exists!</p>';
+    exit();
+}
 
 // Insert the user into the corresponding table
-$sql = "INSERT INTO $tableName (`username`, `password`) VALUES ('$username', '$password')";
+$sql = "INSERT INTO $tableName (`Email`,`Username`, `Password`) VALUES ('$email','$username', '$password')";
 if (mysqli_query($conn, $sql)) {
-    echo "User registered successfully!";
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration successful! Please wait...</p>';
+    echo '<script>
+        setTimeout(function(){
+            window.location.href = "both.php";
+        }, 2000);
+    </script>';
 } else {
-    echo "Error registering user: " . mysqli_error($conn);
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration not successful. Please try again.</p>';
 }
 
 // Close the database connection
