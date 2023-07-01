@@ -14,6 +14,12 @@
 <body>
 <h1>DISPLAY OF THE INSERTED DATA</h1>
 
+<button onclick = "redirectToPage()"> Display all details </button>
+<script>
+function redirectToPage(){
+  window.location.href= "fetch.php" }
+  </script>
+
 
 <?php
 require_once("dbconnection.php");
@@ -93,6 +99,7 @@ if ($result) {
 // Close the prepared statement and database connection
 $stmt->close();
 $conn->close();
+
 
 
 ?>
