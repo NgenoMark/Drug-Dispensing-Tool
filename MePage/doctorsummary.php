@@ -21,14 +21,15 @@
   $PatientSSN = isset($_POST["ssn"]) ? $_POST["ssn"] : "";
   $FirstName = isset($_POST["fname"]) ? $_POST["fname"] : "";
   $LastName = isset($_POST["lname"]) ? $_POST["lname"] : "";
-  $PatientIllness = isset($_POST["Illness"]) ? $_POST["Illness"] : "";
-  $PatientPrescription = isset($_POST["Prescription"]) ? $_POST["Prescription"] : "";
+  $PatientIllness = isset($_POST["illness"]) ? $_POST["illness"] : "";
+  $PatientPrescription = isset($_POST["prescription"]) ? $_POST["prescription"] : "";
   $DrugsPrescribed = isset($_POST["drugp"]) ? $_POST["drugp"] : "";
+  
 
   // Inserts the record into the database 
 
  // Inserts the record into the database 
-$sql = "INSERT INTO doctorsummary (PatientSSN, firstname, lastname, PatientIllness, PatientPrescription, DrugsPrescribed)
+$sql = "INSERT INTO doctorsummary (PatientSSN, FirstName, LastName, PatientIllness, PatientPrescription, DrugsPrescribed)
 VALUES (?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
@@ -42,7 +43,7 @@ echo "Could not insert record: " . $stmt->error;
 
 
   // Prepare the SQL statement
-  $stmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ? AND firstname = ? AND lastname = ? AND PatientIllness = ?  AND PatientPrescription = ? AND DrugsPrescribed = ? ");
+  $stmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ? AND FirstName = ? AND LastName = ? AND PatientIllness = ?  AND PatientPrescription = ? AND DrugsPrescribed = ? ");
   $stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $PatientPrescription, $DrugsPrescribed);
   
   // Execute the prepared statement
@@ -67,8 +68,8 @@ echo "Could not insert record: " . $stmt->error;
           while ($row = $result->fetch_assoc()) {
               echo "<tr>
                       <td>".$row['PatientSSN']."</td>
-                      <td>".$row['firstname']."</td>
-                      <td>".$row['lastname']."</td>
+                      <td>".$row['FirstName']."</td>
+                      <td>".$row['LastName']."</td>
                       <td>".$row['PatientIllness']."</td>
                       <td>".$row['PatientPrescription']."</td>
                       <td>".$row['DrugsPrescribed']."</td>
