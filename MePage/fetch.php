@@ -2,35 +2,56 @@
 <html>
 <head>
     <style>
-        table, th, td {
-            border: 1px solid black;
+
+        body{
+            background-color : #2C3333; 
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
         }
 
         th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
             background-color: #96D4D6;
-            border-style: solid;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h2{
+            color : white ;
         }
 
         .pagination {
-            display: inline-block;
-        }
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-        }
+.pagination a {
+    color: black;
+    float: none;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
 
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #4CAF50;
-        }
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
 
-        .pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
     </style>
 </head>
 <body>
@@ -58,7 +79,7 @@
         $deleteStmt->close();
     }
 
-    $results_per_page = 15; // Number of results per page
+    $results_per_page = 13; // Number of results per page
     $sql = "SELECT COUNT(*) AS total FROM patients";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
@@ -98,7 +119,10 @@
                     <td>".$row['PatientPrescription']."</td>
                     <td>".$row['DrugPrescribed']."</td>
                     <td>".$row['DrugSSN']."</td>
-                    <td><a href='edit.php?ssn=".$row['PatientSSN']."'>Edit</a></td>
+                    <td>
+                        <a href='edit.php?ssn=".$row['PatientSSN']."'>Edit</a> |
+                        <a href='delete.php?ssn=".$row['PatientSSN']."'>Delete</a>
+                    </td>
                 </tr>";
         }
 
