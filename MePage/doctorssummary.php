@@ -4,13 +4,20 @@
     <meta charset="utf-8">
     <title>Login</title>
     <style>
+
         body {
-            background-image:url("images/surgery.png") ;
+          /* <!--background-image:url("images/surgery.png") ;--> */
             background-size: cover;
+            background-color : black ;
         }
 
+        legend{
+            color : white ;
+            font-family : Helvetica , Arial , sans-serif ;
+        }
         h1{
             color : white ;
+            font-family : Helvetica , Arial , sans-serif ;
         }
 
         #doctorName {
@@ -37,6 +44,18 @@
 
         .form-save{
             text-align : center ;
+        }
+
+        .form-button{
+            border: none;
+            background: green;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: .4s;
+
         }
 
         .form-label {
@@ -101,8 +120,9 @@
         </div>
 
         <div class="form-save">
-                <input type="submit" value="Save in system" class="form-button">
-            </div>
+            <button type = "submit" class = "form-button"> Submit  </button>
+        </div>
+
     </fieldset>
 </form>
 </body>
