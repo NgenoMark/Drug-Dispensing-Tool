@@ -9,10 +9,30 @@
                 background-color: black;
             }
 
-            h1 {
+
+.logo {
+  color: white;
+  top : 30px;
+  left : 30px;
+  font-size: 40px;
+}
+
+nav {
+  display: flex;
+  align-items: left ;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color : #354649;
+  margin : 0 ;
+}
+
+
+h1 {
                 position: absolute;
-                top: 10px;
-                right: 10px;
+                top: 50px;
+                right: 40px;
             }
 
             .form-container {
@@ -36,11 +56,46 @@
             .form-buttons {
                 text-align: center;
             }
+
+            .button{
+            border: none;
+            background: green;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: .4s;
+            }
+
+        
+
+            .form-head{
+                color : white;
+            }
+
+            .button:hover{
+                cursor: pointer;
+                background-color : red ;
+            }
+
+            .functions{
+                display : flex ;
+                justify-content : space-between ;
+                margin-top: 20px;
+            }
         </style>
     </head>
     <body>
+
+    <div class="topnav">
+  <nav>
+    <h2 class="logo">Neta Pharmacy</h2>
+  </nav>
+</div>
         <form action="patients.php" method="POST">
             <fieldset>
+
                 <?php
                 session_start();
                 if (isset($_SESSION['username'])) {
@@ -49,7 +104,7 @@
                 }
                 ?>
 
-                <legend>NEW PATIENTS REGISTRATION FORM:</legend>
+                <legend class = "form-head">NEW PATIENTS REGISTRATION FORM:</legend>
 
                 <div class="form-container">
                     <div class="form-column">
@@ -74,9 +129,10 @@
                         </div>
 
                         <div class="form-row">
-                            <label for="age" class="form-label">Patient Age:</label><br>
-                            <input type="number" id="age" name="age" required><br>
+                            <label for="dob" class="form-label">Date of Birth:</label><br>
+                            <input type="date" id="dob" name="dob" required><br>
                         </div>
+
                     </div>
 
                     <div class="form-column">
@@ -98,20 +154,35 @@
                 </div>
 
                 <div class="form-buttons">
-                    <input type="submit" formaction="patients.php" value="Save new patient details"><br><br>
-                    <button onclick="redirectToPage()">Display Patients</button><br><br>
-                    <input type="submit" formaction="fetch.php" value="Display all patients in the system"><br><br>
-                    <input type="submit" formaction="inventory.html" value="Check the inventory"><br><br>
-                    <input type="submit" formaction="payment.html" value="Proceed to payment"><br><br>
-                    <input type="reset">
+                    <button class = "button" type = "submit"> Submit </button>
+                    <button class = "button" type = "reset" > Reset </button>
                 </div>
 
-                <script>
-                    function redirectToPage() {
-                        window.location.href = "fetch.php"; // Replace with your desired URL
-                    }
-                </script>
+                
             </fieldset>
-        </form>
+        </form> <br> <br>
+
+        <div class = "functions">
+        <button class = "button" onclick="redirectToPatientsPage()">Display Patients</button><br><br>
+        <script>
+                function redirectToPatientsPage() {
+                window.location.href = "fetch.php"; // Replace with your desired URL
+                    }
+        </script>
+        <button class = "button" onclick = "redirectToInventory()"> Check Inventory </button> <br> <br>
+        <script>
+            function redirectToInventory(){
+                window.location.href = "inventory.php" ;
+            }
+        </script>
+        <button class = "button" onclick = "redirectToPayment()"> Payment</button> <br>
+        <script>
+            function redirectToPayment(){
+                alert("Redirecting you to PayPal");
+                window.location.href = "";
+            }
+        </script>
+        </div>
+
     </body>
 </html>
