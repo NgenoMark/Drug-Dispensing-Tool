@@ -127,8 +127,15 @@
         }
 
         echo '</table>';
+        ?>
 
-        // Display pagination links
+        <form method="POST">
+        <label for="delete_ssn">Enter Patient SSN to delete:</label>
+        <input type="text" name="delete_ssn" id="delete_ssn">
+        <button type="submit" name="delete">Delete</button>
+    </form>
+
+    <?php    // Display pagination links
         echo '<div class="pagination">';
         for ($page = 1; $page <= $total_pages; $page++) {
             echo '<a href="?page='.$page.'"';
@@ -143,10 +150,5 @@
     }
     ?>
 
-    <form method="POST">
-        <label for="delete_ssn">Enter Patient SSN to delete:</label>
-        <input type="text" name="delete_ssn" id="delete_ssn">
-        <button type="submit" name="delete">Delete</button>
-    </form>
 </body>
 </html>
