@@ -10,6 +10,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/trust.png");
+
 }
 
 /* Style the header */
@@ -19,11 +21,10 @@ header {
 }
 
 .topnav {
-  height: 100vh;
+  height: 30vh;
   width: 100%;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/trust.png");
   background-size: cover;
   background-position: center;
 }
@@ -110,7 +111,7 @@ footer {
   <nav>
     <h2 class="logo">Neta Pharmacy</h2>
     <ul>
-      <li><a href="#">Home</a></li>
+      <li><a href="#Home">Home</a></li>
       <li><a href="#">Service</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact Us</a></li>
@@ -124,19 +125,13 @@ footer {
   </nav>
 </div>
 
-<section>
-  <article>
-    <h1>DETAILS</h1>
-    <p>This is an application that assists in drug dispensing and is used by both doctors and pharmacists to assist in dispensing drugs to patients.</p>
-    <p>The patients involved are either walk-in patients or patients sent from the hospital.</p>
-    <p>Click on the <mark>Login</mark> link in the navigation bar above to proceed to the login page.</p>
-    <p>You can also click on the <mark>Pharmacy Details</mark> link in the navigation bar above to view details concerning the pharmacy.</p>
-  </article>
-</section>
-
-<footer>
-  <p>SELECT ONE OF THE DISPLAYED LINKS TO PROCEED</p>
-</footer>
+<div id = "Home" style = "Color : white ; ">
+   <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo quo impedit error saepe blanditiis
+   eum sit obcaecati officiis? Adipisci enim porro cupiditate consequuntur necessitatibus pariatur q
+   uos eligendi ipsum iure ut?
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, quibusdam tenetur! Totam ev
+  eniet voluptas error iure esse et laboriosam ea natus quis, atque, vero, odio ad ipsam at eius. Nihil.</p>
+</div>
 
 </body>
 </html>
