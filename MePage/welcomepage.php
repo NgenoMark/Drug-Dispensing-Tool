@@ -308,7 +308,7 @@ footer {
     <button onclick = "redirectToLoginPage()" type="button">Login</button>
     <script>
       function redirectToLoginPage(){
-        window.location.href='both.php';
+        window.location.href='loginpage.php';
       }
     </script>
   </nav>
