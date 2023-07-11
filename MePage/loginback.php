@@ -21,7 +21,7 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['user_type']
             if ($pass === $storedPassword) {
                 $_SESSION['username'] = $row['Username'];
                 $_SESSION['user_type'] = 'Doctor';
-                header("Location: doctorssummary.php");
+                header("Location: doctorsummary.php");
                 exit();
             }
         }
