@@ -8,7 +8,7 @@ if (isset($_POST['SSN'])) {
     $ssn = $_POST['SSN'];
 
     // Prepare and execute the query to retrieve patient details
-    $stmt = $conn->prepare('SELECT * FROM doctorsummary WHERE PatientSSN = ?');
+    $stmt = $conn->prepare('SELECT * FROM patients WHERE PatientSSN = ?');
     $stmt->bind_param('s', $ssn);
     $stmt->execute();
 
@@ -72,16 +72,22 @@ if (isset($_POST['SSN'])) {
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Illness</th>
-                    <th>Prescription</th>
+                    <th>Address</th>
+                    <th>Age</th>
+                    <th>Patient Prescription</th>
                     <th>Drugs Prescribed</th>
+                    <th>Drug SSN</th>
+
                 </tr>
                 <tr>
-                    <td><?php echo $patientDetails['FirstName']; ?></td>
-                    <td><?php echo $patientDetails['LastName']; ?></td>
-                    <td><?php echo $patientDetails['PatientIllness']; ?></td>
+                    <td><?php echo $patientDetails['firstname']; ?></td>
+                    <td><?php echo $patientDetails['lastname']; ?></td>
+                    <td><?php echo $patientDetails['Address']; ?></td>
+                    <td><?php echo $patientDetails['Age']; ?></td>
                     <td><?php echo $patientDetails['PatientPrescription']; ?></td>
-                    <td><?php echo $patientDetails['DrugsPrescribed']; ?></td>
+                    <td><?php echo $patientDetails['DrugPrescribed']; ?></td>
+                    <td><?php echo $patientDetails['DrugSSN']; ?></td>
+
                 </tr>
             </table> <br> <br>
         <?php else: ?>
