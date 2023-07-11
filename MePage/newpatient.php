@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- This allows the pharmacist on login to register a new patient . They can also look at available patients
+          ,check the inveentory and also confirm payment for patient -->
 <html lang="en">
     <head>
         <meta charset="utf-8">

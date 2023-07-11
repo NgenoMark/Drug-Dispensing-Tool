@@ -60,11 +60,11 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['user_type']
     }
 
     // Invalid username or password
-    header("Location: both.php?error=Incorrect username or password");
+    header("Location: loginpage.php?error=Incorrect username or password");
     exit();
 } else {
     // Invalid form submission
-    header("Location: both.php");
+    header("Location: loginpage.php");
     exit();
 }
 

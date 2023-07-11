@@ -1,92 +1,130 @@
 <!DOCTYPE html>
-<html>
-  <style>
-    table, th, td {
-      border: 1px solid black;
-    }
-    th, td {
-      background-color: #96D4D6;
-      border-style: solid;
-    }
-  </style>
+<!-- This is the front page where the doctor inserts analysis of patient -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style>
+
+        body {
+          /* <!--background-image:url("images/surgery.png") ;--> */
+            background-size: cover;
+            background-color : black ;
+        }
+
+        legend{
+            color : white ;
+            font-family : Helvetica , Arial , sans-serif ;
+        }
+        h1{
+            color : white ;
+            font-family : Helvetica , Arial , sans-serif ;
+        }
+
+        #doctorName {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: blue;
+            font-size: 18px;
+        }
+
+        .form-column {
+            width: 50%;
+            float: left;
+        }
+
+        .form-column:first-child {
+            margin-right: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+            text-align : center;
+        }
+
+        .form-save{
+            text-align : center ;
+        }
+
+        .form-button{
+            border: none;
+            background: green;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: .4s;
+
+        }
+
+        .form-label {
+            font-size: 18px;
+            color: white;
+        }
+
+        .form-button {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
 <body>
-  <h1>DISPLAY OF THE INSERTED DATA</h1>
 
-  <?php
-  session_start();
-  require_once("dbconnection.php");
+<form action="displaysummary.php" method="POST">
+    <fieldset>
+        <legend>DOCTORS SUMMARY:</legend>
 
-  // Posts items in the database 
+        <?php
+        session_start();
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            echo "<h1>Welcome, $username</h1>";
+        }
+        ?>
 
-  $PatientSSN = isset($_POST["ssn"]) ? $_POST["ssn"] : "";
-  $FirstName = isset($_POST["fname"]) ? $_POST["fname"] : "";
-  $LastName = isset($_POST["lname"]) ? $_POST["lname"] : "";
-  $PatientIllness = isset($_POST["illness"]) ? $_POST["illness"] : "";
-  $PatientPrescription = isset($_POST["prescription"]) ? $_POST["prescription"] : "";
-  $DrugsPrescribed = isset($_POST["drugp"]) ? $_POST["drugp"] : "";
-  
+        <div class="form-column">
+            <div class="form-row">
+                <label for="ssn" class="form-label">Patient SSN:</label><br>
+                <input type="text" id="ssn" name="ssn" required autofocus autocomplete="off"><br>
+            </div>
 
-  // Inserts the record into the database 
+            <div class="form-row">
+                <label for="fname" class="form-label">First name:</label><br>
+                <input type="text" id="fname" name="fname" required autofocus autocomplete="off"><br>
+            </div>
 
- // Inserts the record into the database 
-$sql = "INSERT INTO doctorsummary (PatientSSN, FirstName, LastName, PatientIllness, PatientPrescription, DrugsPrescribed)
-VALUES (?, ?, ?, ?, ?, ?)";
+            <div class="form-row">
+                <label for="lname" class="form-label">Last name:</label><br>
+                <input type="text" id="lname" name="lname" required autofocus autocomplete="off"><br>
+            </div>
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $PatientPrescription, $DrugsPrescribed);
+            <div class="form-row">
+                <label for="illness" class="form-label">Patient Illness(s):</label><br>
+                <textarea name="illness" rows="5" cols="30" required></textarea><br>
+            </div>
+        </div>
 
-if ($stmt->execute()) {
-echo "Record inserted successfully";
-} else {
-echo "Could not insert record: " . $stmt->error;
-}
+        <div class="form-column">
+            <div class="form-row">
+                <label for="prescription" class="form-label">Patient Prescription:</label><br>
+                <textarea name="prescription" rows="10" cols="30" required></textarea><br>
+            </div>
 
+            <div class="form-row">
+                <label for="drugp" class="form-label">Drug(s) prescribed and their dosages:</label><br>
+                <textarea name="drugp" rows="10" cols="30" required></textarea><br><br>
+            </div>
+        </div>
 
-  // Prepare the SQL statement
-  $stmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ? AND FirstName = ? AND LastName = ? AND PatientIllness = ?  AND PatientPrescription = ? AND DrugsPrescribed = ? ");
-  $stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $PatientPrescription, $DrugsPrescribed);
-  
-  // Execute the prepared statement
-  $stmt->execute();
+        <div class="form-save">
+            <button type = "submit" class = "form-button"> Submit  </button>
+        </div>
 
-  // Get the result
-  $result = $stmt->get_result();
-
-  if ($result) {
-      if ($result->num_rows > 0) {
-          // Generate the table
-          echo '<table style="width:100%">
-              <tr>
-                  <th>Patient SSN</th>
-                  <th>First name</th>
-                  <th>Last name</th>
-                  <th>Patient Illness</th>
-                  <th style="width:400%">Patients Prescription</th>
-                  <th>Drug Prescribed</th>
-              </tr>';
-
-          while ($row = $result->fetch_assoc()) {
-              echo "<tr>
-                      <td>".$row['PatientSSN']."</td>
-                      <td>".$row['FirstName']."</td>
-                      <td>".$row['LastName']."</td>
-                      <td>".$row['PatientIllness']."</td>
-                      <td>".$row['PatientPrescription']."</td>
-                      <td>".$row['DrugsPrescribed']."</td>
-                  </tr>";
-          }
-
-          echo '</table>';
-      } else {
-          echo "No records found.";
-      }
-  } else {
-      echo "Error retrieving records: " . $stmt->error;
-  }
-
-  // Close the prepared statement and database connection
-  $stmt->close();
-  $conn->close();
-  ?>
+    </fieldset>
+</form>
 </body>
 </html>

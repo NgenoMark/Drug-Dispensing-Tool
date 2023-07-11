@@ -39,7 +39,7 @@ body {
 <body class="body">
     <div class="loginbox">  
         <div class="loginboxh2">
-            <form action="bback.php" method="post">
+            <form action="loginback.php" method="post">
                 <img src="doctorlogo.jpg" alt="DOCTORS LOGO" style="width:250px;height:250px;">
                 <h1 style="font-size:40px">LOGIN PAGE</h1>
                 <?php if(isset($_GET['error'])) { ?>

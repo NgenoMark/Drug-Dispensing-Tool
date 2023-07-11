@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Front page for a user to register -->
 <html lang="en">
 <head>
     <meta charset="utf-8">

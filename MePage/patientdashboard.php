@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- when patient logs in they enter ssn to view rtheir details -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">

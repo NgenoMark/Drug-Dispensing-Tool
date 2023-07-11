@@ -1,4 +1,5 @@
 <?php
+/* On confirmimg if the SSN entered by patient exists the details of the respective patient is displayed in a table*/
 session_start();
 include("dbconnection.php");
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- This code takes inventory details from database and disolays it-->
 <html lang="en">
 <head>
     <meta charset="utf-8">

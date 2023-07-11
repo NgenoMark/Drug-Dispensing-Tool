@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- After the pharmacist clicks submit button the new patient is registered to database and the entered details are
+         taken to database . You can also view all other patients-->
 <html>
 <head>
     <style>

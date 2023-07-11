@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- This code fetches patient data from database and displays it in table-->
 <html>
 <head>
     <style>

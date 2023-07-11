@@ -1,4 +1,5 @@
 <?php
+/* This code allows editing of the patient details incase of a change */
 require_once("dbconnection.php");
 
 // Check if the form is submitted

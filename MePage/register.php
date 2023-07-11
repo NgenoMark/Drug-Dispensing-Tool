@@ -1,4 +1,5 @@
 <?php
+/* When a person registers the details are updated according to inserted data . This is the backend logic */
 session_start();
 include("dbconnection.php");
 // Assuming you have a database connection established
