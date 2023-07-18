@@ -17,7 +17,7 @@
 <body>
     <h1>DISPLAY OF THE INSERTED DATA</h1>
 
-    <button onclick="redirectToPage()">Display all details</button>
+    <button onclick="redirectToPage()">View all patients</button>
 
     <script>
         function redirectToPage() {
@@ -34,9 +34,9 @@
     $LastName = $_POST["lname"];
     $PatientAddress = $_POST["address"];
     $DateOfBirth = $_POST["dob"];
-    $PatientPrescription = isset($_POST["pres"]) ? $_POST["pres"] : "";
-    $DrugPrescribed = isset($_POST["drugp"]) ? $_POST["drugp"] : "";
-    $DrugSSN = $_POST["drug"];
+    $Patientillness = isset($_POST["illness"]) ? $_POST["illness"] : ""; 
+    $DrugsPrescribed = isset($_POST["drugp"]) ? $_POST["drugp"] : "";
+    /*$DrugSSN = $_POST["drug"]; */
 
     // Calculate age based on date of birth
     $today = new DateTime();
@@ -44,18 +44,22 @@
     $PatientAge = $today->diff($birthDate)->y;
 
     // Inserts the record into the database
-    $sql = "INSERT INTO patients (`PatientSSN`, `firstname`, `lastname`, `Address`, `Age`, `PatientPrescription`, `DrugPrescribed`, `DrugSSN`)
-            VALUES ('$PatientSSN', '$FirstName', '$LastName', '$PatientAddress', '$PatientAge', '$PatientPrescription', '$DrugPrescribed', '$DrugSSN')";
+    $sql_patients = "INSERT INTO patients (`PatientSSN`, `FirstName`, `LastName`, `Address`, `Age`, `Patientillness`, `DrugsPrescribed`)
+            VALUES ('$PatientSSN', '$FirstName', '$LastName', '$PatientAddress', '$PatientAge', '$Patientillness', '$DrugsPrescribed')";
 
-    if (mysqli_query($conn, $sql)) {
+    $sql_doctor = "INSERT INTO  doctorsummary (`PatientSSN`, `FirstName`, `LastName`, `Patientillness`, `DrugsPrescribed`)
+            VALUES ('$PatientSSN', '$FirstName', '$LastName', '$Patientillness', '$DrugsPrescribed')";
+   
+
+    if (mysqli_query($conn, $sql_patients) && (mysqli_query($conn, $sql_doctor))) {
         echo "Record inserted successfully";
     } else {
         echo "Could not insert record: " . mysqli_error($conn);
     }
 
     // Prepare the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM patients WHERE PatientSSN = ? AND firstname = ? AND lastname = ? AND Address = ? AND PatientPrescription = ? AND DrugPrescribed= ? AND DrugSSN = ?");
-    $stmt->bind_param("sssssss", $PatientSSN, $FirstName, $LastName, $PatientAddress, $PatientPrescription, $DrugPrescribed, $DrugSSN);
+    $stmt = $conn->prepare("SELECT * FROM patients WHERE PatientSSN = ? AND FirstName = ? AND LastName = ? AND Address = ? AND Patientillness = ? AND DrugsPrescribed= ? ");
+    $stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientAddress, $Patientillness, $DrugsPrescribed);
 
     // Execute the prepared statement
     $stmt->execute();
@@ -73,21 +77,19 @@
                     <th>Last name</th>
                     <th>Patient Address</th>
                     <th>Age</th>
-                    <th style="width:400%">Patients Prescription</th>
+                    <th >Patients illness</th>
                     <th>Drug Prescribed</th>
-                    <th>Drug SSN</th>
                 </tr>';
 
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row['PatientSSN'] . "</td>
-                        <td>" . $row['firstname'] . "</td>
-                        <td>" . $row['lastname'] . "</td>
+                        <td>" . $row['FirstName'] . "</td>
+                        <td>" . $row['LastName'] . "</td>
                         <td>" . $row['Address'] . "</td>
                         <td>" . $row['Age'] . "</td>
-                        <td>" . $row['PatientPrescription'] . "</td>
-                        <td>" . $row['DrugPrescribed'] . "</td>
-                        <td>" . $row['DrugSSN'] . "</td>
+                        <td>" . $row['Patientillness'] . "</td>
+                        <td>" . $row['DrugsPrescribed'] . "</td>
                     </tr>";
             }
 
