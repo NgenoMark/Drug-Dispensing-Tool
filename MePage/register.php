@@ -1,32 +1,34 @@
 <?php
-/* When a person registers the details are updated according to inserted data . This is the backend logic */
 session_start();
 include("dbconnection.php");
-// Assuming you have a database connection established
 
-// Retrieve the form data
-$userType = $_POST["user"];
-$email = $_POST["email"];
+$position = $_POST["position"];
+$allnames = $_POST["allnames"];
 $username = $_POST["username"];
+$phone = $_POST["phone"];
+$email = $_POST["email"];
+$dob = $_POST["dob"];
+$ID = $_POST["ID"];
 $password = $_POST["password"];
+
+// Rest of the code for database insertion goes here
+
+
+
 
 // Perform any necessary validation on the form data
 
-// Validate email format
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Invalid email format!</p>';
-    exit();
-}
-
-// Determine the table based on the user type
-if ($userType === "Doctor") {
-    $tableName = "doctorslogin";
-} elseif ($userType === "Pharmacist") {
-    $tableName = "pharmacistslogin";
-} elseif ($userType === "Patient") {
-    $tableName = "patientslogin";
+// Determine the table based on the selected position
+if ($position === "Doctor") {
+    $tableName = "doctorlogin";
+} elseif ($position === "Patient") {
+    $tableName = "patienttlogin";
+} elseif ($position === "Pharmacist") {
+    $tableName = "pharmacistlogin";
+} elseif ($position === "Admin") {
+    $tableName = "adminslogin";
 } else {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Invalid user type!</p>';
+    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Invalid position!</p>';
     exit();
 }
 
@@ -39,12 +41,18 @@ if (mysqli_num_rows($emailCheckResult) > 0) {
 }
 
 // Insert the user into the corresponding table
-$sql = "INSERT INTO $tableName (`Email`,`Username`, `Password`) VALUES ('$email','$username', '$password')";
-if (mysqli_query($conn, $sql)) {
+$sql = "INSERT INTO $tableName (`allnames`, `username`, `phone`, `email`, `dob`, `ID`, `password`) 
+        VALUES ('$allnames', '$username', '$phone', '$email', '$dob', '$ID', '$password')";
+
+$sql_all = "INSERT INTO users (`allnames`, `username`, `phone`, `email`, `dob`, `ID`, `password`)
+        VALUES ('$allnames', '$username', '$phone', '$email', '$dob', '$ID', '$password')";
+ 
+
+if (mysqli_query($conn, $sql) && (mysqli_query($conn,$sql_all))) {
     echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration successful! Please wait...</p>';
     echo '<script>
         setTimeout(function(){
-            window.location.href = "both.php";
+            window.location.href = "loginpage.php";
         }, 2000);
     </script>';
 } else {
