@@ -139,8 +139,8 @@ h1 {
 
                     <div class="form-column">
                         <div class="form-row">
-                            <label for="prescription" class="form-label">Patient Prescription:</label><br>
-                            <textarea name="pres" rows="5" cols="30"></textarea><br>
+                            <label for="illness" class="form-label">Patient illness:</label><br>
+                            <textarea name="illness" rows="5" cols="30"></textarea><br>
                         </div>
 
                         <div class="form-row">
@@ -148,10 +148,10 @@ h1 {
                             <textarea name="drugp" rows="5" cols="30"></textarea><br>
                         </div>
 
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                             <label for="drug" class="form-label">Drug SSN:</label><br>
                             <input type="text" id="drug" name="drug"><br><br>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -177,13 +177,13 @@ h1 {
                 window.location.href = "inventory.php" ;
             }
         </script>
-        <button class = "button" onclick = "redirectToPayment()"> Payment</button> <br>
+        <button class="button" onclick="redirectToPayment()">Payment</button>
         <script>
-            function redirectToPayment(){
-                alert("Redirecting you to PayPal");
-                window.location.href = "";
+            function redirectToPayment() {
+                 window.open("https://www.paypal.com/signin", "_blank");
             }
         </script>
+
         </div>
 
     </body>
