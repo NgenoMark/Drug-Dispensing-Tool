@@ -53,17 +53,18 @@ body {
                 <option value="Doctor">Doctor</option>
                 <option value="Pharmacist">Pharmacist</option>
                 <option value="Patient">Patient</option>
+                <option value="Administrator">Administrator</option>
             </select><br>
         </div>
 
         <div class="loginboxh2">
-            <label for="ssn">USERNAME</label><br>
-            <input type="text" id="uname" name="uname" size="40" required autofocus autocomplete="on"><br><br>
+            <label for="username">USERNAME</label><br>
+            <input type="text" id="username" name="username" size="40" required autofocus autocomplete="on"><br><br>
         </div>
 
         <div class="loginboxh2">
-            <label for="pass">PASSWORD</label><br>
-            <input type="password" id="pass" name="pass" size="40" required autofocus autocomplete="on"><br><br>
+            <label for="password">PASSWORD</label><br>
+            <input type="password" id="password" name="password" size="40" required autofocus autocomplete="on"><br><br>
         </div>
 
         <div class="loginboxh2">
