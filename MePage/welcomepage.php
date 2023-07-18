@@ -13,6 +13,8 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color : black ;
+  padding-top : 80px ;
+  margin: 0 ;
   /* background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/trust.png"); --> */
 }
 
@@ -23,10 +25,18 @@ header {
 }
 
 .topnav {
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-}
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 9999;
+      background-color: transparent;
+      transition: background-color 0.3s; /* Add transition for smooth effect */
+
+    }
+
+.topnav.transparent {
+      background-color: rgba(0, 0, 0, 0.6); /* Set the desired translucent background color */
+    }
 
 nav {
   display: flex;
@@ -72,6 +82,14 @@ nav ul li a:hover {
   transition: 0.3s;
 }
 
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+
 button {
   border: none;
   background: red;
@@ -92,6 +110,7 @@ button:hover {
 .front1 {
   position: relative;
   overflow: hidden;
+  margin-top : 80px ;
 }
 
 .front1 h1 {
@@ -277,12 +296,28 @@ h2{
     width: auto!important;
   }
 
+  .client-review{
+    /*background-image : url("images/purple.jpg"); */
+    background-color : black ;
+    background-size : cover;
+    background-position : center ;
+    margin-top : 0px ;
+    margin-bottom : 0px ;
+    height : 500px;
+    }
+
 /* Style the footer */
-footer {
-  background-color: blue;
+.footer {
+  background-color: #001C30;
   padding: 10px;
   text-align: center;
   color: white;
+  display : flex;
+  justify-content : space-between ;
+}
+
+li{
+  color : white ;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
@@ -294,16 +329,28 @@ footer {
 }
 </style>
 
+<script>
+window.addEventListener('scroll', function() {
+  var nav = document.querySelector('.topnav');
+  if (window.scrollY > 0) {
+    nav.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+  } else {
+    nav.style.backgroundColor = 'transparent';
+  }
+});
+
+  </script>
+
 </head>
 <body>
 
 <div class="topnav">
-  <nav>
+  <nav class = "">
     <h2 class="logo">Neta Pharmacy</h2>
     <ul>
       <li><a href="#Home">Home</a></li>
-      <li><a href="#">Service</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="#Service">Service</a></li>
+      <li><a href="#contact-us">Contact Us</a></li>
     </ul>
     <button onclick = "redirectToLoginPage()" type="button">Login</button>
     <script>
@@ -313,15 +360,15 @@ footer {
     </script>
   </nav>
 </div>
-<div class = "front1" >
+<div class = "front1"  id="Home" >
 <video autoplay muted loop id="video-background">
     <source src="" type="video/mp4">
   </video>
 
   <h1>All in one Pharmacy and Medical checkup institution</h1>
 
-  <div class="home" id="Home" style="color: white;">
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+  <div class="home"  style="color: white;">
+    <p>We take medical care to the next level. Experience it yourself.</p>
     <button class="regbutton" onclick="redirectToRegisterPage()">Sign up for free</button>
     <script>
       function redirectToRegisterPage(){
@@ -344,7 +391,7 @@ footer {
 </div>
 
 
-<div class  = "front2" >
+<div class  = "front2" id = "Service">
   <h1 class = "front2-h1" style =padding-top : 30px;> <i> Medical service anytime <br> and anywhere </i></h1>
   <div class = "front2-img">
   <a href=""> <img src="images/caduceus-symbol.png" alt=""></a>
@@ -377,8 +424,146 @@ footer {
  </div>
 </section>
 
-<div class = "footer">
-  <div class = ""></div>
+
+
+<div class = "client-review">
+<style>
+  .clients {
+    background: linear-gradient(120deg, #454545 0, #e5f2f2 var(--gradient-x), #454545 100%);
+    font-family: 'Albert Sans ExtraBold', sans-serif;
+    font-style: italic ;
+    font-size : 3rem ;
+    margin: 0;
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .clients h1 {
+    color: white;
+    font-size : 3rem ;
+
+    -webkit-text-stroke: 2px #454545; /* Added text stroke for visibility */
+  }
+</style>
+
+<div class="clients">
+  <h1>What do our clients have to say about us?</h1>
+</div>
+
+
+
+
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .item {
+    flex-basis: 27%;
+    background-color: lightgray;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin-top: 25px;
+    text-align: center;
+    border-radius: 10px; /* Add this property for curved corners */
+    margin-left : 30px;
+    margin-right : 30px;
+  }
+
+  .favicons2 img {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .name{
+    font-size: large;
+    font-weight : bold ;
+  }
+</style>
+
+<div class="container">
+  <div class="item">
+    <div class="favicons2"> <img src="images/man.png" alt=""> </div>
+    <div class="text">The best platform for quick  <br> medical attention. <br> The quality customer service is good. <br><br><br></div>
+    <div class = "name">Jeremy Lynch</div>
+    <div>⭐⭐⭐⭐⭐</div>
+  </div>
+  <div class="item">
+    <div class="favicons2"> <img src="images/girl.png" alt=""> </div>
+    <div class="text">Available every time I was in urgent need of help. <br> The fact that they can direct you through home procedures is wonderful.<br><br></div>
+    <div class = "name">Ashley Wairimu</div> 
+    <div>⭐⭐⭐⭐</div>
+  </div>
+  <div class="item">
+    <div class="favicons2"> <img src="images/avatar.png" alt=""> </div>
+    <div class="text">I booked an appointment and everything went well. <br> You do not disappoint as they are <br> right on schedule. <br><br></div>
+    <div class = "name">Tom Kioo</div>
+    <div>⭐⭐⭐⭐⭐</div>
+  </div>
+</div>
+</div>
+
+
+<style>
+  .footer .summary{
+    width : 350px ;
+    margin-left : 170px ;
+  }
+
+  .summary h2 {
+    font-size : 2rem ;
+  }
+
+  .contact h3{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .contact h3:visited{
+    color: black;
+  }
+
+  .contact a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+
+  }
+
+  .contact a:visited{
+    color : black ;
+  }
+
+</style>
+
+
+<div class = "footer" id = "contact-us">
+  <div class = "summary">
+    <h2>Neta Pharmacy </h2> <br>
+    <p>All you need in a single pharmacy trust us and experience it yourself.</p> <br> <br>
+      <p color:black;> © 2023 Neta Pharmacy </p>
+</div>
+  
+<div class = "contact">
+    <h2> <i> Contact Us </i> </h2> <br>
+
+     <h3><a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new"> Email </a>  </h3> 
+     <h3><b>Phone number </b> 0329183829 </h3>  
+    <h3><a href="https://www.google.com/maps/place/Komarock+Modern+Healthcare+Hospital/@-1.2750923,36.972682,17z/data=!3m1!4b1!4m6!3m5!1s0x182f6b5e2c9465d5:0x29f2e9455a358f70!8m2!3d-1.2750923!4d36.9752569!16s%2Fg%2F11bzp_x1qb?entry=ttu" target="_blank" rel="noopener noreferrer">  Location </a> </h3>
+  </div>
   <div class = "contact"></div>
 </div>
 
