@@ -2,40 +2,40 @@
 session_start();
 include "dbconnection.php";
 
-if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['user_type'])) {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['user_type'])) {
     // Retrieve and validate the submitted values
-    $uname = validate($_POST['uname']);
-    $pass = $_POST['pass'];
+    $username = validate($_POST['username']);
+    $password = $_POST['password'];
     $user_type = validate($_POST['user_type']);
 
     // Perform validation and verification based on user type
     if ($user_type === 'Doctor') {
         // Perform doctor login verification
-        $sql = "SELECT * FROM doctorslogin WHERE Username = '$uname'";
+        $sql = "SELECT * FROM doctorlogin WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            $storedPassword = $row['Password'];
+            $storedPassword = $row['password'];
 
-            if ($pass === $storedPassword) {
-                $_SESSION['username'] = $row['Username'];
+            if ($password === $storedPassword) {
+                $_SESSION['username'] = $row['username'];
                 $_SESSION['user_type'] = 'Doctor';
-                header("Location: doctorsummary.php");
+                header("Location: doclogin.php");
                 exit();
             }
         }
     } elseif ($user_type === 'Pharmacist') {
         // Perform pharmacist login verification
-        $sql = "SELECT * FROM pharmacistslogin WHERE Username = '$uname'";
+        $sql = "SELECT * FROM pharmacistlogin WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            $storedPassword = $row['Password'];
+            $storedPassword = $row['password'];
 
-            if ($pass === $storedPassword) {
-                $_SESSION['username'] = $row['Username'];
+            if ($password === $storedPassword) {
+                $_SESSION['username'] = $row['username'];
                 $_SESSION['user_type'] = 'Pharmacist';
                 header("Location: newpatient.php");
                 exit();
@@ -43,17 +43,33 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['user_type']
         }
     } elseif ($user_type === 'Patient') {
         // Perform patient login verification
-        $sql = "SELECT * FROM patientslogin WHERE Username = '$uname'";
+        $sql = "SELECT * FROM patienttlogin WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            $storedPassword = $row['Password'];
+            $storedPassword = $row['password'];
 
-            if ($pass === $storedPassword) {
-                $_SESSION['username'] = $row['Username'];
+            if ($password === $storedPassword) {
+                $_SESSION['username'] = $row['username'];
                 $_SESSION['user_type'] = 'Patient';
                 header("Location: patientdashboard.php");
+                exit();
+            }
+        }
+    } elseif ($user_type === 'Administrator') {
+        // Perform admin login verification
+        $sql = "SELECT * FROM adminslogin WHERE username = '$username'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
+            $storedPassword = $row['password'];
+
+            if ($password === $storedPassword) {
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['user_type'] = 'Admin';
+                header("Location: adminpage.php");
                 exit();
             }
         }
