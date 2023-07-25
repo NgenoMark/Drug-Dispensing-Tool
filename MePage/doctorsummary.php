@@ -102,16 +102,19 @@
                 <input type="text" id="lname" name="lname" required autofocus autocomplete="off"><br>
             </div>
 
-            <div class="form-row">
-                <label for="illness" class="form-label">Patient Illness(s):</label><br>
-                <textarea name="illness" rows="5" cols="30" required></textarea><br>
-            </div>
+        
         </div>
 
         <div class="form-column">
-            <div class="form-row">
+             <!-- <div class="form-row">
                 <label for="prescription" class="form-label">Patient Prescription:</label><br>
                 <textarea name="prescription" rows="10" cols="30" required></textarea><br>
+            </div>
+              -->
+
+              <div class="form-row">
+                <label for="illness" class="form-label">Patient Illness(s):</label><br>
+                <textarea name="illness" rows="5" cols="30" required></textarea><br>
             </div>
 
             <div class="form-row">
@@ -123,6 +126,8 @@
         <div class="form-save">
             <button type = "submit" class = "form-button"> Submit  </button>
         </div>
+
+    
 
     </fieldset>
 </form>
