@@ -174,7 +174,7 @@ h1 {
         <button class = "button" onclick = "redirectToInventory()"> Check Inventory </button> <br> <br>
         <script>
             function redirectToInventory(){
-                window.location.href = "inventory.php" ;
+                window.location.href = "inventoryfront.php" ;
             }
         </script>
         <button class="button" onclick="redirectToPayment()">Payment</button>
@@ -183,6 +183,16 @@ h1 {
                  window.open("https://www.paypal.com/signin", "_blank");
             }
         </script>
+        <button class = "button" onclick = "redirectToDispense()"> Dispense Drugs</button>
+        <script>
+            function redirectToDispense(){
+            window.location.href = ("dispense.php");}
+        </script>
+            <button class = "button"  onclick="redirectToHistory()"> View History of Dispensing</button>
+            <script>function redirectToHistory()
+{
+    window.location.href=("historyfetch.php")
+}    </script>
 
         </div>
 
