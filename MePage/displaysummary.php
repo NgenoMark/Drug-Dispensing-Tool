@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <!-- This code fetches the details of the patient after the doctor has submitted and displays them in a table -->
 <html>
-  <style>
-    table, th, td {
-      border: 1px solid black;
-    }
-    th, td {
-      background-color: #96D4D6;
-      border-style: solid;
-    }
-  </style>
+<style>
+  body {
+    background-color: #A1CCD1;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    background-color: #96D4D6;
+    text-align: left;
+  }
+
+  button {
+            border: none;
+            background: red;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: .4s;
+            margin: 20px;
+        }
+
+button:hover {
+            background-color: green;
+            transition: scale(1.3);
+            cursor: pointer;
+        }
+</style>
+
 <body>
   <h1>DISPLAY OF THE INSERTED DATA</h1>
 
@@ -23,18 +50,18 @@
   $FirstName = isset($_POST["fname"]) ? $_POST["fname"] : "";
   $LastName = isset($_POST["lname"]) ? $_POST["lname"] : "";
   $PatientIllness = isset($_POST["illness"]) ? $_POST["illness"] : "";
-  $PatientPrescription = isset($_POST["prescription"]) ? $_POST["prescription"] : "";
+  /* $PatientPrescription = isset($_POST["prescription"]) ? $_POST["prescription"] : ""; */
   $DrugsPrescribed = isset($_POST["drugp"]) ? $_POST["drugp"] : "";
   
 
   // Inserts the record into the database 
 
  // Inserts the record into the database 
-$sql = "INSERT INTO doctorsummary (PatientSSN, FirstName, LastName, PatientIllness, PatientPrescription, DrugsPrescribed)
-VALUES (?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO doctorsummary (PatientSSN, FirstName, LastName, PatientIllness,DrugsPrescribed)
+VALUES (?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $PatientPrescription, $DrugsPrescribed);
+$stmt->bind_param("sssss", $PatientSSN, $FirstName, $LastName, $PatientIllness , $DrugsPrescribed);
 
 if ($stmt->execute()) {
 echo "Record inserted successfully";
@@ -44,8 +71,8 @@ echo "Could not insert record: " . $stmt->error;
 
 
   // Prepare the SQL statement
-  $stmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ? AND FirstName = ? AND LastName = ? AND PatientIllness = ?  AND PatientPrescription = ? AND DrugsPrescribed = ? ");
-  $stmt->bind_param("ssssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $PatientPrescription, $DrugsPrescribed);
+  $stmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ? AND FirstName = ? AND LastName = ? AND PatientIllness = ? AND DrugsPrescribed = ? ");
+  $stmt->bind_param("sssss", $PatientSSN, $FirstName, $LastName, $PatientIllness, $DrugsPrescribed);
   
   // Execute the prepared statement
   $stmt->execute();
@@ -62,7 +89,6 @@ echo "Could not insert record: " . $stmt->error;
                   <th>First name</th>
                   <th>Last name</th>
                   <th>Patient Illness</th>
-                  <th style="width:400%">Patients Prescription</th>
                   <th>Drug Prescribed</th>
               </tr>';
 
@@ -71,8 +97,7 @@ echo "Could not insert record: " . $stmt->error;
                       <td>".$row['PatientSSN']."</td>
                       <td>".$row['FirstName']."</td>
                       <td>".$row['LastName']."</td>
-                      <td>".$row['PatientIllness']."</td>
-                      <td>".$row['PatientPrescription']."</td>
+                      <td>".$row['Patientillness']."</td>
                       <td>".$row['DrugsPrescribed']."</td>
                   </tr>";
           }
@@ -89,5 +114,12 @@ echo "Could not insert record: " . $stmt->error;
   $stmt->close();
   $conn->close();
   ?>
+
+  <button onclick = "redirectToAllPatients()"> View all patients </button>
+  <script>
+    function redirectToAllPatients(){
+      window.location.href = 'fetch.php';
+    }
+  </script>
 </body>
 </html>
