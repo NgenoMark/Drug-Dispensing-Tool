@@ -1,67 +1,68 @@
 <?php
-/* This code allows editing of the patient details incase of a change */
-require_once("dbconnection.php");
+require_once('dbconnection.php');
 
-// Check if the form is submitted
-if (isset($_POST['submit'])) {
-    // Retrieve the form data
-    $PatientSSN = $_POST['ssn'];
-    $FirstName = $_POST['fname'];
-    $LastName = $_POST['lname'];
-    $PatientAddress = $_POST['address'];
-    $PatientAge = $_POST['age'];
-    $PatientPrescription = $_POST['pres'];
-    $DrugPrescribed = $_POST['drugp'];
-    $DrugSSN = $_POST['drug'];
+if (isset($_GET['ssn'])) {
+    $PatientSSNToEdit = $_GET['ssn'];
 
-    // Update the record in the database
-    $sql = "UPDATE patients SET 
-                firstname = '$FirstName',
-                lastname = '$LastName',
-                Address = '$PatientAddress',
-                Age = '$PatientAge',
-                PatientPrescription = '$PatientPrescription',
-                DrugPrescribed = '$DrugPrescribed',
-                DrugSSN = '$DrugSSN'
-            WHERE PatientSSN = '$PatientSSN'";
+    // Check if the update form is submitted
+    if (isset($_POST['update'])) {
+        $FirstName = $_POST['fname'];
+        $LastName = $_POST['lname'];
+        $Patientillness = $_POST['illness'];
+        $DrugsPrescribed = $_POST['drugp'];
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Record updated successfully";
-        // Redirect to the page displaying all patients after successful update
+        // Prepare the SQL statement to update the record
+        $updateStmt = $conn->prepare("UPDATE doctorsummary SET FirstName = ?, LastName = ?, Patientillness = ?, DrugsPrescribed = ? WHERE PatientSSN = ?");
+        $updateStmt->bind_param("sssss", $FirstName, $LastName, $Patientillness, $DrugsPrescribed,  $PatientSSNToEdit);
+
+        // Execute the update statement
+        if ($updateStmt->execute()) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $updateStmt->error;
+        }
+
+        // Close the update statement
+        $updateStmt->close();
+
+        // Redirect to fetch.php
         header("Location: fetch.php");
         exit();
-    } else {
-        echo "Error updating record: " . mysqli_error($conn);
     }
+
+    // Prepare the SQL statement to fetch the record
+    $selectStmt = $conn->prepare("SELECT * FROM doctorsummary WHERE PatientSSN = ?");
+    $selectStmt->bind_param("s", $PatientSSNToEdit);
+
+    // Execute the select statement
+    if ($selectStmt->execute()) {
+        $result = $selectStmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row) {
+            $FirstName = $row['FirstName'] ?? '';
+            $LastName = $row['LastName'] ?? '';
+            $Patientillness = $row['Patientillness'] ?? '';
+            $DrugsPrescribed = $row['DrugsPrescribed'] ?? '';
+
+            // Display the form with the fetched values
+            echo '
+                <form method="POST">
+                    First Name: <input type="text" name="fname" value="'.htmlspecialchars($FirstName).'"><br>
+                    Last Name: <input type="text" name="lname" value="'.htmlspecialchars($LastName).'"><br>
+                    Patient illness: <textarea name="illness" rows="5" cols="30">'.htmlspecialchars($Patientillness).'</textarea><br>
+                    Drug Prescribed: <textarea name="drugp" rows="5" cols="30">'.htmlspecialchars($DrugsPrescribed).'</textarea><br>
+                    <button type="submit" name="update">Update</button>
+                </form>';
+        } else {
+            echo "No record found for the given SSN.";
+        }
+    } else {
+        echo "Error fetching record: " . $selectStmt->error;
+    }
+
+    // Close the select statement
+    $selectStmt->close();
 }
-
-// Fetch the user's data based on SSN
-if (isset($_GET['ssn'])) {
-    $PatientSSN = $_GET['ssn'];
-
-    $sql = "SELECT * FROM patients WHERE PatientSSN='$PatientSSN'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-}
-
+$conn->close();
 ?>
-
-<!-- Display the edit form with pre-filled user data -->
-<form method="POST" action="">
-    <input type="hidden" name="ssn" value="<?php echo $row['PatientSSN']; ?>">
-    <label for="fname">First Name:</label>
-    <input type="text" name="fname" value="<?php echo $row['firstname']; ?>"><br>
-    <label for="lname">Last Name:</label>
-    <input type="text" name="lname" value="<?php echo $row['lastname']; ?>"><br>
-    <label for="address">Address:</label>
-    <input type="text" name="address" value="<?php echo $row['Address']; ?>"><br>
-    <label for="age">Age:</label>
-    <input type="text" name="age" value="<?php echo $row['Age']; ?>"><br>
-    <label for="pres">Patient Prescription:</label>
-    <input type="text" name="pres" value="<?php echo $row['PatientPrescription']; ?>"><br>
-    <label for="drugp">Drug Prescribed:</label>
-    <input type="text" name="drugp" value="<?php echo $row['DrugPrescribed']; ?>"><br>
-    <label for="drug">Drug SSN:</label>
-    <input type="text" name="drug" value="<?php echo $row['DrugSSN']; ?>"><br>
-    <input type="submit" name="submit" value="Update">
-</form>
