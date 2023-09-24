@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    
     <style>
         
   
@@ -40,7 +40,7 @@ body {
     <div class="loginbox">  
         <div class="loginboxh2">
             <form action="loginback.php" method="post">
-                <img src="doctorlogo.jpg" alt="DOCTORS LOGO" style="width:250px;height:250px;">
+                
                 <h1 style="font-size:40px">LOGIN PAGE</h1>
                 <?php if(isset($_GET['error'])) { ?>
                     <p class="error"><?php echo $_GET['error']; ?></p>

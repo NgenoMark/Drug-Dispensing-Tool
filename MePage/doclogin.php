@@ -32,6 +32,8 @@
 <body>
     <button onclick = "redirectTonewPatients()"> New Patient </button>
     <button onclick = "redirectToallPatients()"> Existing Patient </button>
+    <button onclick = "redirectToLogout()"> Logout </button>
+
 
     <script>
         function redirectTonewPatients(){
@@ -41,6 +43,12 @@
         function redirectToallPatients(){
             window.location.href = "fetch.php";
         }
+
+        function redirectToLogout(){
+            window.location.href = "logoutpage.html";
+        }
+
+
     </script>
 </body>
 </html>

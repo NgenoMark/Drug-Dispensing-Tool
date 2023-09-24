@@ -13,9 +13,6 @@ $password = $_POST["password"];
 
 // Rest of the code for database insertion goes here
 
-
-
-
 // Perform any necessary validation on the form data
 
 // Determine the table based on the selected position
@@ -48,15 +45,20 @@ $sql_all = "INSERT INTO users (`allnames`, `username`, `phone`, `email`, `dob`, 
         VALUES ('$allnames', '$username', '$phone', '$email', '$dob', '$ID', '$password')";
  
 
-if (mysqli_query($conn, $sql) && (mysqli_query($conn,$sql_all))) {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration successful! Please wait...</p>';
-    echo '<script>
-        setTimeout(function(){
-            window.location.href = "loginpage.php";
-        }, 2000);
-    </script>';
+if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql_all)) {
+    echo "<script>
+         setTimeout(function(){
+                alert('User successfully registered');
+                window.location.href = 'loginpage.php';
+                }, 3000);
+        </script>";
+   
 } else {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration not successful. Please try again.</p>';
+    echo "<script> 
+            setTimeout(function(){
+                    alert('User registration Unsuccessful');
+                }, 3000);
+     </script>";
 }
 
 // Close the database connection

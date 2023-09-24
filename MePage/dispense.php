@@ -38,10 +38,12 @@ function validate($data)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drug Dispensing</title>
+    <link rel="stylesheet" href="stylef.css">
 </head>
 <body>
-    <h1>Drug Dispensing</h1>
+   <div class="container">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <h1>Drug Dispensing</h1>
         <div>
             <label for="PatientName">Patient Name:</label>
             <input type="text" name="PatientName" id="PatientName" required>
@@ -60,6 +62,7 @@ function validate($data)
         </div>
         <div>
             <input type="submit" value="Dispense Drug">
+        </div>
         </div>
     </form>
 </body>

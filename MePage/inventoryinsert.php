@@ -21,15 +21,30 @@
   require_once("dbconnection.php");
 
   // Posts items in the database 
+  $Category=isset($_POST["cat"]) ? $_POST["cat"] : "";
   $DrugName = isset($_POST["dname"]) ? $_POST["dname"] : "";
   $DrugSSN= isset($_POST["dssn"]) ? $_POST["dssn"] : "";
   $Quantity = isset($_POST["quan"]) ? $_POST["quan"] : "";
+  $Details = isset($_POST["des"]) ? $_POST["des"] : "";
   $PharmaceuticalCompany = isset($_POST["Pharm"]) ? $_POST["Pharm"] : "";
   $Price = isset($_POST["price"]) ? $_POST["price"] : "";
 
+
+  // File upload handling
+  $target_dir = "images/"; // Create an "images" directory in your project folder
+  $target_file = $target_dir . basename($_FILES["image"]["name"]);
+  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+  if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+      echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+  } else {
+      echo "Sorry, there was an error uploading your file.";
+  }
+
   // Inserts the record into the database 
-  $sql = "INSERT INTO inventory(DrugName, DrugSSN,Quantity,PharmaceuticalCompany,Price)
-  VALUES (?, ?, ?, ?,?)";
+  $ImagePath = $target_file;
+  $sql = "INSERT INTO inventory(Category,DrugName, DrugSSN,Quantity,Details,PharmaceuticalCompany,Price,ImagePath)
+  VALUES (?, ?, ?, ?,?,?,?,?)";
 
   $stmt = $conn->prepare($sql);
 
@@ -38,7 +53,7 @@
     exit;
   }
 
-  $stmt->bind_param("sssss",$DrugName,$DrugSSN, $Quantity,$PharmaceuticalCompany,$Price);
+  $stmt->bind_param("ssssssss", $Category,$DrugName,$DrugSSN, $Quantity,$Details,$PharmaceuticalCompany,$Price,$ImagePath);
 
   if ($stmt->execute()) {
     echo "Record inserted successfully";
@@ -48,7 +63,7 @@
   }
 
   // Prepare the SQL statement
-  $sql = "SELECT * FROM inventory WHERE DrugName = ? AND DrugSSN = ? AND Quantity = ? AND PharmaceuticalCompany=?  AND Price =? " ;
+  $sql = "SELECT * FROM inventory WHERE  Category = ? AND  DrugName = ? AND DrugSSN = ? AND Quantity = ? AND Details = ? AND PharmaceuticalCompany = ?  AND Price = ? AND  ImagePath = ? " ;
   $stmt = $conn->prepare($sql);
 
   if (!$stmt) {
@@ -56,7 +71,7 @@
     exit;
   }
 
-  $stmt->bind_param("sssss", $DrugName,$DrugSSN, $Quantity,$PharmaceuticalCompany,$Price);
+  $stmt->bind_param("ssssssss", $Category,$DrugName,$DrugSSN, $Quantity,$Details,$PharmaceuticalCompany,$Price,$ImagePath);
 
   // Execute the prepared statement
   if ($stmt->execute()) {
@@ -71,21 +86,27 @@
         // Generate the table
         echo '<table>
               <tr>
+              <th> Drug Category</th>
                 <th>Drug Name</th>
                 <th>Drug SSN </th>
                 <th>Quantity</th>
-                <th>PharmaceuticalCompany</th>
+                <th width=40% height=40%>Details</th>
+                <th PharmaceuticalCompany</th>
                 <th>Price</th>
+                <th>Image Path</th>
         
               </tr>';
 
         while ($row = $result->fetch_assoc()) {
           echo "<tr>
+                 <td>".$row['Category']."</td>
                   <td>".$row['DrugName']."</td>
                   <td>".$row['DrugSSN']."</td>
                   <td>".$row['Quantity']."</td>
+                  <td>".$row['Details']."</td>
                   <td>".$row['PharmaceuticalCompany']."</td>
                   <td>".$row['Price']."</td>
+                  <td>".$row['ImagePath']."</td>
     
                 </tr>";
         }
