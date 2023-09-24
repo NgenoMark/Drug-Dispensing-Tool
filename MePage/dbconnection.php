@@ -5,7 +5,7 @@
 $servername = "localhost";
 $username  = "root";
 $password = "";
-$dbname  = "drugdispensingtool";
+$dbname  = "drug_dispensing_tool";
 
 $conn = mysqli_connect($servername , $username ,$password , $dbname );
 
