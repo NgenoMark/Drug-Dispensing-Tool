@@ -564,6 +564,7 @@ window.addEventListener('scroll', function() {
      <h3><b>Phone number </b> 0329183829 </h3>  
     <h3><a href="https://www.google.com/maps/place/Komarock+Modern+Healthcare+Hospital/@-1.2750923,36.972682,17z/data=!3m1!4b1!4m6!3m5!1s0x182f6b5e2c9465d5:0x29f2e9455a358f70!8m2!3d-1.2750923!4d36.9752569!16s%2Fg%2F11bzp_x1qb?entry=ttu" target="_blank" rel="noopener noreferrer">  Location </a> </h3>
   </div>
+  <div class = "contact"></div>
 </div>
 
 

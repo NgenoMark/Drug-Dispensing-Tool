@@ -10,7 +10,7 @@
             background-color: black;
         }
 
-        .btn {
+        .btn{
             border: none;
             background: red;
             padding: 12px 30px;
@@ -54,7 +54,9 @@
     <button class="btn" onclick="redirectToPatients()"> View Patients</button> <br>
     <button class="btn" onclick="redirectToInventory()"> Check Inventory </button> <br>
     <button class="btn" onclick="redirectToUsers()"> View all users </button> <br>
-    <button class = "btn"  onclick="redirectToHistory()"> View History of Dispensing</button>
+    <button class = "btn"  onclick="redirectToHistory()"> View History of Dispensing</button><br><br><br><br><br><br><br><br><br><br>
+    <button  class = "btn" onclick = "redirectToLogout()"> Logout </button>
+
 
     <script>
         function redirectToPatients() {
@@ -72,6 +74,13 @@
         function redirectToHistory()
 {
     window.location.href=("historyfetch.php")
-}    </script>
+}   
+
+function redirectToLogout(){
+            window.location.href = "logoutpage.html";
+        }
+
+
+</script>
 </body>
 </html>

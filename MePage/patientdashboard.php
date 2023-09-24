@@ -26,19 +26,62 @@
             width : 20% ;
         }
 
+        <style>
+        body {
+            background-color: black;
+        }
+
+        .btn {
+            border: none;
+            background: red;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            transition: .4s;
+            margin: 20px;
+        }
+
+        .btn:hover {
+            background-color: green;
+            transition: scale(1.3);
+            cursor: pointer;
+        }
+
+        .welcome-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 20px;
+            color: white;
+        }
+
+        .welcome-container h1 {
+            margin-left: 20px;
+        }
       
        
 
     </style>
 </head>
 <body>
-    <form action="patientdashback.php" method="post">
+    <form  method="post">
         <fieldset>
             <legend>Please enter your SSN:</legend> <br>
             <label for="SSN">SSN:</label><br> <br>
-            <input type="text" name="SSN" id="SSN"><br><br>
-            <button type="submit">Search</button>
-        </fieldset>
+            <input type="text" name="SSN" id="SSN" required ><br><br>
+            <button type="submit" formaction="patientdashback.php">Search</button>     
+        </fieldset><br><br><br><br><br><br>
+
+
+        <button  class = "btn" onclick = "redirectToLogout()"> Logout </button>
+
+        <script>
+            function redirectToLogout(){
+            window.location.href = "logoutpage.html";
+        }
+        </script>
     </form>
 </body>
 </html>

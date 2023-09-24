@@ -192,7 +192,14 @@ h1 {
             <script>function redirectToHistory()
 {
     window.location.href=("historyfetch.php")
-}    </script>
+}    </script><br>
+
+        <button style="background-color:red;"class = "button" onclick = "redirectToLogout()"> Logout</button>
+        <script>
+            function redirectToLogout(){
+            window.location.href = ("logoutpage.html");}
+        </script>
+
 
         </div>
 

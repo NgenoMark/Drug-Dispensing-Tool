@@ -96,21 +96,28 @@
     if ($num > 0) {
         echo '<table>
             <tr>
-                <th>DrugName</th>
-                <th>DrugSSN</th>
-                <th>Quantity</th>
-                <th>PharmaceuticalCompany</th>
-                <th>Price</th>
+            <th> Drug Category</th>
+            <th>Drug Name</th>
+            <th>Drug SSN </th>
+            <th>Quantity</th>
+            <th width=40% height=30%>Details</th>
+            <th>PharmaceuticalCompany</th>
+            <th>Price</th>
+            <th>Image Path</th>
+    
                 <th width=20%>Action</th>
             </tr>';
 
         while ($result = mysqli_fetch_assoc($query)) {
             echo "<tr>
+                   <td>".$result['Category']."</td>
                     <td>".$result['DrugName']."</td>
                     <td>".$result['DrugSSN']."</td>
                     <td>".$result['Quantity']."</td>
+                    <td>".$result['Details']."</td>
                     <td>".$result['PharmaceuticalCompany']."</td>
                     <td>".$result['Price']."</td>
+                    <td>".$result['ImagePath']."</td>
                     <td>
                         <a href='inventorydisplay.php?DrugSSN=".$result['DrugSSN']."' class='button'>Delete</a>
                         <a href='inventoryupdate.php?DrugSSN=".$result['DrugSSN']."' class='button'>Update</a>
