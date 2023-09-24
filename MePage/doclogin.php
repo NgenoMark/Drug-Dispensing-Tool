@@ -7,6 +7,10 @@
 
     <style>
 
+        h1{
+            color: white;
+        }
+
         body{
             background-color : black ;
         }
@@ -27,9 +31,30 @@
             transition: scale(1.3);
             cursor: pointer;
         }
+
+        .top_info{
+            display : block ;
+        }
     </style>
 </head>
+<header>
+
+</header>
 <body>
+
+<?php include("header.php"); ?>
+
+<div class = "top_info">
+<?php
+        session_start();
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            echo "<h1>Welcome, $username</h1>";
+        }
+        ?>
+
+    
+</div>
     <button onclick = "redirectTonewPatients()"> New Patient </button>
     <button onclick = "redirectToallPatients()"> Existing Patient </button>
 
@@ -42,5 +67,8 @@
             window.location.href = "fetch.php";
         }
     </script>
+
+<?php include("footer.php"); ?>
+
 </body>
 </html>

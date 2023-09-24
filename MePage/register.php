@@ -13,9 +13,6 @@ $password = $_POST["password"];
 
 // Rest of the code for database insertion goes here
 
-
-
-
 // Perform any necessary validation on the form data
 
 // Determine the table based on the selected position
@@ -48,16 +45,33 @@ $sql_all = "INSERT INTO users (`allnames`, `username`, `phone`, `email`, `dob`, 
         VALUES ('$allnames', '$username', '$phone', '$email', '$dob', '$ID', '$password')";
  
 
-if (mysqli_query($conn, $sql) && (mysqli_query($conn,$sql_all))) {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration successful! Please wait...</p>';
-    echo '<script>
-        setTimeout(function(){
-            window.location.href = "loginpage.php";
-        }, 2000);
-    </script>';
+ if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql_all)) {
+    echo "<div id='success-alert' style='display:none;'>
+            User successfully registered
+          </div>
+          <script>
+            setTimeout(function(){
+                document.getElementById('success-alert').style.display = 'block';
+                setTimeout(function(){
+                    window.location.href = 'loginpage.php';
+                }, 1000);
+            }, 1000);
+          </script>";
 } else {
-    echo '<p style="font-size: 20px; background-color: #333; color: #fff; padding: 10px;">Registration not successful. Please try again.</p>';
+    echo "<div id='error-alert' style='display:none;'>
+            User registration Unsuccessful
+          </div>
+          <script>
+            setTimeout(function(){
+                document.getElementById('error-alert').style.display = 'block';
+                setTimeout(function(){
+                    window.location.href = 'your_previous_page.php';
+                }, 1000);
+            }, 1000);
+          </script>";
 }
+
+
 
 // Close the database connection
 mysqli_close($conn);
