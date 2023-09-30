@@ -81,7 +81,7 @@ nav ul li a:hover {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color : black ;
+  /*background-color : black ; */
   padding-top : 0 ;
   margin: 0 ;
   /* background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/trust.png"); --> */
@@ -106,13 +106,12 @@ body {
         <button onclick = "redirectToWelcome()"> Log  Out </button>
         <script>
             function redirectToWelcome(){
-                window.location.href = "welcomepage.php";
+                window.location.href = "logoutpage.html";
             }
         </script>
         </nav>
 
         </div>
 
-    footer
     </body>
 </html>
