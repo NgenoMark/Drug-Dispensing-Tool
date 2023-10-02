@@ -50,6 +50,15 @@ ul li a{
   color: white;
   text-decoration: none;
   font-weight: bold;
+  color:green;
+
+}
+
+ul li a:hover{
+    color:red;
+    transition:.3s;
+    size:2rem;
+    text-decoration: bold italic;
 }
 
 body{
@@ -75,7 +84,6 @@ include("header.php");
 ?>
 
 <header>
-    <h3>Neta Pharmacy</h3>
     <ul>
 
         <li> <a href="drugdisplay.php?category=Analgesics">Analgesics</a></li>
@@ -88,7 +96,7 @@ include("header.php");
 </header>
 
 <?php
-$selectedCategory = $_GET['category'] ?? null;
+$selectedCategory = $_GET['category'] ?? 'Analgesics';
 
 $servername = "localhost";
 $username = "root";
