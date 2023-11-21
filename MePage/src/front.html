@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drug Insertion</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #drugNameInput {
+      margin-bottom: 10px;
+    }
+
+    #insertButton {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Drug Insertion</h1>
+  <div>
+    <label for="drugNameInput">Drug Name:</label>
+    <input type="text" id="drugNameInput">
+  </div>
+  <button id="insertButton">Insert Drug</button>
+
+  <script>
+    document.getElementById('insertButton').addEventListener('click', async function () {
+      const drugName = document.getElementById('drugNameInput').value;
+
+      try {
+        const response = await fetch('http://localhost:3000/drugs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: drugName
+          })
+        });
+
+        const data = await response.json();
+        console.log('Drug inserted successfully:', data);
+        alert('Drug inserted successfully! ID: ' + data.id);
+      } catch (error) {
+        console.error('Error inserting drug:', error);
+        alert('Error inserting drug. Please check the console for details.');
+      }
+    });
+  </script>
+</body>
+
+</html>
